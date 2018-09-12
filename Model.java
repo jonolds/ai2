@@ -16,12 +16,16 @@ class Model {  //max horizontal/vertical screen position. min is 0
 	Model(Controller c) { this.controller = c; }
 
 	void initGame() throws Exception {
-		BufferedImage bufferedImage = ImageIO.read(new File("terrain.png"));
-		if(bufferedImage.getWidth() != 60 || bufferedImage.getHeight() != 60)
+		BufferedImage bufImg = ImageIO.read(new File("terrain.png"));
+		System.out.println(bufImg.getType());
+		if(bufImg.getWidth() != 60 || bufImg.getHeight() != 60)
 			throw new Exception("Expected the terrain image to have dimensions of 60-by-60");
-		BufferedImage b2 = bufferedImage.getSubimage(0, 0, 10, 10);
+		BufferedImage b2 = bufImg.getSubimage(6, 2, 10, 10);
+
 		t2 = ((DataBufferByte)b2.getRaster().getDataBuffer()).getData();
-		terrain = ((DataBufferByte)bufferedImage.getRaster().getDataBuffer()).getData();
+		//File outputfile = new File("test.png");
+		ImageIO.write(b2, "png", new File("test.png"));
+		terrain = ((DataBufferByte)bufImg.getRaster().getDataBuffer()).getData();
 		sprites = new ArrayList<>();
 		sprites.add(new Sprite(100, 100));
 	}

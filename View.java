@@ -14,6 +14,7 @@ public class View extends JFrame implements ActionListener {
 	Controller controller;
 	Model model;
 	private MyPanel panel;
+	Color color;
 
 	public View(Controller c, Model m) throws Exception {
 		this.controller = c;
@@ -21,7 +22,7 @@ public class View extends JFrame implements ActionListener {
 		// Make the game window
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Moving Robot");
-		this.setSize(1203, 636);
+		this.setSize(250, 110);
 		this.panel = new MyPanel();
 		this.panel.addMouseListener(controller);
 		this.getContentPane().add(this.panel);
@@ -53,13 +54,14 @@ public class View extends JFrame implements ActionListener {
 //					posBlue2 += 4;
 //				}
 //		}
-
+		int x, y, w = 10, h = 10;
 		void drawTerrain(Graphics g) {
+			//System.out.println(g.getClipBounds());
 			byte[] terrain = model.getTerrain();
-			int posBlue = 0;
+			int posBlue = 16;
 			int posRed = (60 * 60 - 1) * 4;
-			for(int y = 0; y < 60; y++) {
-				for(int x = 0; x < 60; x++) {
+			for(int y = 0; y < 7; y++) {
+				for(int x = 0; x < 7; x++) {
 					int bb = terrain[posBlue + 1] & 0xff;
 					int gg = terrain[posBlue + 2] & 0xff;
 					int rr = terrain[posBlue + 3] & 0xff;
@@ -67,6 +69,7 @@ public class View extends JFrame implements ActionListener {
 					g.fillRect(10 * x, 10 * y, 10, 10);
 					posBlue += 4;
 				}
+				posBlue += 212;
 				for(int x = 60; x < 120; x++) {
 					int bb = terrain[posRed + 1] & 0xff;
 					int gg = terrain[posRed + 2] & 0xff;
@@ -76,6 +79,9 @@ public class View extends JFrame implements ActionListener {
 					posRed -= 4;
 				}
 			}
+//			System.out.println(terrain[20] & 0xff);
+//			g.setColor(new Color(87, 122, 129));
+//			g.fillRect(40, 40, 500, 100);
 		}
 
 		void drawSprites(Graphics g) {

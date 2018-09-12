@@ -36,14 +36,18 @@ class Controller implements MouseListener {
 		return mouseEvents.remove();
 	}
 
+//	public void mousePressed(MouseEvent e) {
+//		if(e.getY() < 600) {
+//			mouseEvents.add(e);
+//			agent.clicked = true;
+//			agent.mousePos = new int[]{e.getX(), e.getY()};
+//			if(mouseEvents.size() > 20) // discard events if the queue gets big
+//				mouseEvents.remove();
+//		}
+//	}
+
 	public void mousePressed(MouseEvent e) {
-		if(e.getY() < 600) {
-			mouseEvents.add(e);
-			agent.clicked = true;
-			agent.mousePos = new int[]{e.getX(), e.getY()};
-			if(mouseEvents.size() > 20) // discard events if the queue gets big
-				mouseEvents.remove();
-		}
+		System.out.println(e.getX() + "," + e.getY());
 	}
 
 	public void mouseReleased(MouseEvent e) {    }
